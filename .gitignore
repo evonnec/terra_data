@@ -103,7 +103,24 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# Mac
+.DS_Store/
+
+# vs code
+.vscode/
+
+# back up
+*.bak
+
+# log
+*.log
+
+# pem
+*.pem
+
 #terraform files
 .terraform/
 *.tfvars
 *.tfstate
+*.tfstate.*
+*gitignore*.tf
