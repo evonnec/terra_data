@@ -13,6 +13,7 @@ resource "aws_instance" "control" {
 
 	connection {
 		user   						= "ubuntu"
+		password					= "${var.ubuntu_password}"
 		agent 						= "false"
 		host 						= self.public_ip
 		private_key 				= "${file("~/.ssh/${aws_instance.control.key_name}.pem")}"
@@ -30,17 +31,17 @@ resource "aws_instance" "control" {
 			"sudo apt install build-essential cmdtest python3-pip -y",
 			"sudo apt install postgresql postgresql-contrib -y",
 			"git clone https://github.com/evonnec/terra_data.git",
-			"chmod +x ~/terra_data/",
-			"source ./terra_data/env_vars.sh"
-			"source ./terra_data/setup.sh",
+			"sudo chmod u+x ~/terra_data/env_vars.sh",
+			"./terra_data/env_vars.sh",
+			"sudo chmod u+x ~/terra_data/setup.sh",
 			"./terra_data/setup.sh"
 		]
 	}
 }
 
 resource aws_key_pair "terra_data" {
-    key_name = "terra_data_${var.random_string}"
-    public_key = "${file("~/.ssh/${var.terra_data_key})}"
+    key_name 		= "terra_data_${var.random_string}"
+    public_key 		= "${file("~/.ssh/${aws_instance.control.key_name}.pem")}"
 }
 
 

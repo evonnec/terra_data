@@ -10,10 +10,14 @@ Create a IaC to a cloud provider that will allow for management of data processi
     2. `git clone` repo
     
     3. from git repo, run a set up script that: 
-        a. sets up Postgres
-        b. pulls raw data from S3 to local
-        c. writes up a schema and cleans data systematically from that raw data
-        d. uses schema to then push raw data in csv format to psql/Postgres
+
+        - sets up Postgres
+
+        - pulls raw data from S3 to local
+
+        - writes up a schema and cleans data systematically from that raw data
+
+        - uses schema to then push raw data in csv format to psql/Postgres
 
 
 <h2>Dataset</h2>

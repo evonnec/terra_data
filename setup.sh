@@ -4,7 +4,7 @@
 sudo apt install virtualenv -y
 python3 -m pip install --user --upgrade pip
 python3 -m pip install --user virtualenv
-sudo apt-get install python3-venv
+sudo apt-get install python3-venv -y
 python3 -m venv env
 source env/bin/activate
 
@@ -25,15 +25,17 @@ chmod 700 .pgpass #give permissions
 echo "*:5432:"${DB_NAME}":"${POSTGRES_USER}":"${POSTGRES_PWD} > .pgpass
 
 #change the config files
-sudo -u postgres sed -i "s|listen_addresses = 'localhost'|listen_addresses = '*'|" /etc/postgresql/[0-9][0-9]/main/postgresql.conf
+sudo -u postgres sed -i "s|local   all             postgres|local   all             all|" /etc/postgresql/[0-9][0-9]/main/postgresql.conf
 sudo -u postgres sed -i "s|127.0.0.1/32|0.0.0.0/0|" /etc/postgresql/[0-9][0-9]/main/pg_hba.conf
 sudo -u postgres sed -i "s|::1/128|::/0|" /etc/postgresql/[0-9][0-9]/main/pg_hba.conf
-sudo -u postgres sed -i "s|    peer|    md5|g" /etc/postgresql/[0-9][0-9]/main/pg_hba.conf
+sudo -u postgres sed -i "s|    peer|    trust|g" /etc/postgresql/[0-9][0-9]/main/pg_hba.conf
+#trust should be md5
 
 #restart postgresql
 sudo service postgresql restart
 
-sudo -u postgres psql
+#sudo -u postgres psql - can do this now:
+psql -U postgres
 #in postgres now
 #postgres=#
 \du #creates super user

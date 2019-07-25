@@ -27,3 +27,5 @@ variable "postgres_pwd" { type = string }
 variable "random_string" { type = string }
 
 variable "terra_data_key" { type = string }
+
+variable "ubuntu_password" { type = string }
