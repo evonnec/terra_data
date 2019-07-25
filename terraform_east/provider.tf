@@ -5,3 +5,4 @@ provider "aws" {
         region = "${var.region}"
 }
 
+#did not go with the provider postgresql, but could be done

@@ -23,3 +23,7 @@ variable "db_name" { type = string }
 variable "postgres_user" { type = string }
 
 variable "postgres_pwd" { type = string }
+
+variable "random_string" { type = string }
+
+variable "terra_data_key" { type = string }

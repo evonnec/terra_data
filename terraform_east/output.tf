@@ -12,3 +12,5 @@ output "s3" {
 	value = "${terraform.workspace}"
 	description = "AWS S3"
 }
+
+#more outputs would be nice here
