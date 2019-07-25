@@ -31,6 +31,7 @@ resource "aws_instance" "control" {
 			"sudo apt install postgresql postgresql-contrib -y",
 			"git clone https://github.com/evonnec/terra_data.git",
 			"chmod +x ~/terra_data/",
+			"source ./terra_data/env_vars.sh"
 			"source ./terra_data/setup.sh",
 			"./terra_data/setup.sh"
 		]

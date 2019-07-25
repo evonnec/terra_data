@@ -6,7 +6,7 @@ import pandas as pd
 
 
 input_file = 'loan.csv' #sys.argv[1] CR to-do: let these be arguments
-output_file = 'schema_readin_csv.sql' #sys.argv[2]
+output_file = 'schemas/schema_readin_csv.sql' #sys.argv[2]
 
 #in case pandas and respective dataframes are scrapped, we can use csv library below to obtain headers
 #determining datatypes to fill for schema would have to be handled separately.
@@ -43,7 +43,7 @@ with open(dtypes_file, mode='r') as dtypes_input_file:
         if row[1] == "int64" or row[1] == "float64":
             schema_list.append(row[0] + " " + "numeric")
         #convert to text
-        elif row[1] == "object" or row[1] = "O":
+        elif row[1] == "object" or row[1] == "O":
             schema_list.append(row[0] + " " + "text")
 
 
@@ -54,6 +54,9 @@ schema_list_string = ""
 for field in schema_list:
     line = ",".join([field]) + ","
     schema_list_string += line
+
+schema_list_string = schema_list_string[:-1] #remove the last comma
+schema_list_string.replace(',desc', ',descr') #make col name not type
 
 #table name ought to be an argument, not hardcoded. simplified here for this use case.
 sql_schema = "CREATE TABLE raw_lending_club_loan_data (" + schema_list_string + ");"
