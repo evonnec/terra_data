@@ -9,9 +9,7 @@ python3 -m venv env
 source env/bin/activate
 
 #boto3 and other packages installed inside virtual env with python3
-pip install boto3
-pip install matplotlib
-pip install pandas
+pip install boto3 matplotlib pandas
 
 #sudo passwd
 #enter a UNIX password
@@ -33,19 +31,11 @@ sudo -u postgres sed -i "s|    peer|    trust|g" /etc/postgresql/[0-9][0-9]/main
 
 #restart postgresql
 sudo service postgresql restart
-
-#sudo -u postgres psql - can do this now:
-psql -U postgres
-#in postgres now
-#postgres=#
-\du #creates super user
-\q
-
-#out of postgres
 sudo service postgresql reload
 
 # aws configure
 # resource key pair provided via terraform
+# pulls data from s3 bucket
 aws s3 ls
 aws s3 sync s3://${BUCKET_NAME} .
 
