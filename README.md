@@ -6,10 +6,14 @@ Create a IaC to a cloud provider that will allow for management of data processi
 <h2>Architecture</h2>
 
 1. terraform a cloud instance, e.g. AWS EC2. Then, with Terraform:
+    
     2. `git clone` repo
-    3. set up Postgres
-    4. pull raw data in S3
-    5. clean data from S3 and store in Postgres
+    
+    3. from git repo, run a set up script that: 
+        a. sets up Postgres
+        b. pulls raw data from S3 to local
+        c. writes up a schema and cleans data systematically from that raw data
+        d. uses schema to then push raw data in csv format to psql/Postgres
 
 
 <h2>Dataset</h2>
@@ -43,11 +47,11 @@ The engineering challenges were
 5. cd (change directory) into the terraform folder. write up a terraform.tfvars file to satisfy variables.tf - not all of these are used, can pick what is needed for it to run. 
 
 6. write an env_vars.sh file that states 
-export BUCKET_NAME="<your bucket name here>"
-export POSTGRES_USER="<your postgres user name>"
-export POSTGRES_PWD="<your postgres password>"
-export DB_NAME="<your database name>"
-export POSTGRES_PORT="<this will probably be 5432 for Postgres>"
+export BUCKET_NAME="[your bucket name here]"
+export POSTGRES_USER="[your postgres user name]"
+export POSTGRES_PWD="[your postgres password]"
+export DB_NAME="[your database name]"
+export POSTGRES_PORT="[this will probably be 5432 for Postgres]"
 
 7. run `terraform init`, then `terraform plan` (give it a region) then `terraform apply -auto-approve` (also give it a region)
 
@@ -82,7 +86,7 @@ export POSTGRES_PORT="<this will probably be 5432 for Postgres>"
 
 <h3>System Improvements</h3>
  
- In the future, system improvements could include implementing Apache Airflow on the ETL instance, as well as implementing a separate instance for Postgres and networking the ETL instance and the Postgres database instances. Writing up a mapping of all possible datatypes from csv to sql would prove useful as a lookup tool to determine what to convert the datatypes to for consumption by the database table. Pandas is great to manipulate data under a certain size, however with larger sized datasets, scrapping pandas should be explored as well as implementing data partitioning. Also dividing up tasks as functions that are called, for a better idea of what to address when some task should fail.
+ In the future, system improvements could include implementing Apache Airflow on the ETL instance, as well as implementing a separate instance for Postgres and networking the ETL instance and the Postgres database instances. Writing up a mapping of all possible datatypes from csv to sql would prove useful as a lookup reference to determine what to convert the datatypes to for consumption by the database table. Pandas is great to manipulate data under a certain size, however with larger sized datasets, scrapping pandas should be explored in favor of something more robust - as well as implementing data partitioning. Also in python, dividing up tasks as functions that are called between .py files, for a better idea of what to address when some task should fail.
 
 <h4>Additional Guidance</h4>
 
