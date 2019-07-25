@@ -13,7 +13,7 @@ pip install boto3
 pip install matplotlib
 pip install pandas
 
-sudo passwd
+#sudo passwd
 #enter a UNIX password
 
 #create some users, permissions and the database
